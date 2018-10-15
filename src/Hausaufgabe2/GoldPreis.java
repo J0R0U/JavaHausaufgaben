@@ -7,17 +7,17 @@ import java.util.Collections;
 import java.util.Scanner;
 
 /**
- *
- * @author
- * @version V00.00B01
+ * Der GoldPreis handelt sich um eine Klasse, die die Goldtagespreise aus einer Datei einliest, speichert und verwaltet.
+ * @author Jonas, Dominik, Julia
+ * @version V01.00B00
  */
 public class GoldPreis {
 	private ArrayList<GoldTagespreis> list;
 
 	/**
-	 *
-	 * @param dateiname 3
-	 * @throws FileNotFoundException
+	 * Liest die uebergebene Datei ein und speichert die Daten in einer Liste.
+	 * @param dateiname String; Pfad der Datei, die eingelesen werden soll.
+	 * @throws FileNotFoundException wird geschmissen, wenn die Datei nicht gefunden wird.
 	 */
 	public GoldPreis(String dateiname) throws FileNotFoundException {
 		File fi = new File(dateiname);
@@ -34,9 +34,9 @@ public class GoldPreis {
 	}
 
 	/**
-	 *
-	 * @param datum
-	 * @return
+	 * Get-Methode für den Preis an einem bestimmten Datum.
+	 * @param datum String; Datum für welches der Preis gesucht wird.
+	 * @return double preis an datum.
 	 */
 	public double getPreis(String datum) {
 		for (GoldTagespreis entery : list) {
@@ -49,7 +49,7 @@ public class GoldPreis {
 	}
 
 	/**
-	 *
+	 * Gibt den hoechsten und den niedrigsten Goldpreis mit zugehoerigem Datum in der Konsole aus.
 	 */
 	public void printMinMax() {
 		Collections.sort(list, (gt1, gt2) -> Double.compare(gt1.preis, gt2.preis));
@@ -81,7 +81,7 @@ public class GoldPreis {
 	}
 
 	/**
-	 *
+	 * Dies ist eine Test-Methode.
 	 * @param args
 	 */
 	public static void main(String[] args) {
