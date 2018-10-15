@@ -1,4 +1,4 @@
-package Hausaufgabe2;
+package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 /**
- * Der GoldPreis handelt sich um eine Klasse, die die Goldtagespreise aus einer Datei einliest, speichert und verwaltet.
+ * Bei GoldPreis handelt es sich um eine Klasse, die die Goldtagespreise aus einer Datei einliest, speichert und verwaltet.
  * @author Jonas, Dominik, Julia
  * @version V01.00B00
  */
@@ -34,14 +34,14 @@ public class GoldPreis {
 	}
 
 	/**
-	 * Get-Methode für den Preis an einem bestimmten Datum.
-	 * @param datum String; Datum für welches der Preis gesucht wird.
-	 * @return double preis an datum.
+	 * Get-Methode fuer den Preis an einem bestimmten Datum.
+	 * @param datum String; Datum fuer welches der Preis gesucht wird.
+	 * @return double Preis an datum.
 	 */
 	public double getPreis(String datum) {
-		for (GoldTagespreis entery : list) {
-			if (entery.datum.equals(datum)) {
-				return entery.preis;
+		for (GoldTagespreis entry : list) {
+			if (entry.datum.equals(datum)) {
+				return entry.preis;
 			}
 		}
 
@@ -86,7 +86,7 @@ public class GoldPreis {
 	 */
 	public static void main(String[] args) {
 		try {
-			GoldPreis test = new GoldPreis("C:\\Java-Vorkurs\\JavaHausaufgaben\\src\\Hausaufgabe2\\goldpreise.txt");
+			GoldPreis test = new GoldPreis("gold.txt");
 			System.out.println(test.getPreis("2009-10-20"));
 			System.out.println(test.getPreis("2009-02-07"));
 			test.printMinMax();

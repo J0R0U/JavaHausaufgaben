@@ -1,10 +1,10 @@
-package Hausaufgabe2;
+package main;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
 /**
- * Der GoldTagesPreis handelt sich um eine Klasse, die den Goldtagespreis mit dem jeweiligen Datum verknuepft.
+ * Bei GoldTagesPreis handelt es sich um eine Klasse, die den Goldtagespreis mit dem jeweiligen Datum verknuepft.
  * @author Jonas, Dominik, Julia
  * @version V01.00B00
  */

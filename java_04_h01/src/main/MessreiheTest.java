@@ -1,4 +1,5 @@
-package Hausaufgabe1;
+package main;
+
 
 import java.util.Arrays;
 
