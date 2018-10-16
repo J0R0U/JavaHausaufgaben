@@ -10,7 +10,7 @@ import java.util.Scanner;
  * bietet die Moeglichkeit ein Double-Array aus einer Textdatei einzulesen.
  * 
  * @author Julia, Dominik, Jonas
- * @version V01.00B00
+ * @version V01.01B00
  */
 public class Messreihe {
 	// Das repraesentierte Double-Array
@@ -146,7 +146,7 @@ public class Messreihe {
 	 */
 	public int getMaxIndex() {
 		double max = liste.length >= 1 ? liste[0] : Double.NaN;
-		int ret = -1;
+		int ret = liste.length >= 1 ? 0 : -1;
 		for (int i = 1; i < liste.length; i++) {
 			if (Double.compare(max, liste[i]) < 0) {
 				max = liste[i];
