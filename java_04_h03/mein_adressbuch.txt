@@ -1,0 +1,3 @@
+﻿Paul;paul@worldwideweb.de
+Maria;maria@gmy.de
+Peter;peter@s-offline.de
