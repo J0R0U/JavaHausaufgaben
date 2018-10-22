@@ -1,5 +1,9 @@
 package main;
-
+ /**
+  * Bei UnknownNameException handelt es sich um eine Klasse, in der eine neue Exception geschrieben wurde.
+  * @author Jonas, Dominik, Julia
+  * V01.00B00
+  */
 public class UnknownNameException extends RuntimeException {
 	
 	private static final long serialVersionUID = 1896638113680402709L;
