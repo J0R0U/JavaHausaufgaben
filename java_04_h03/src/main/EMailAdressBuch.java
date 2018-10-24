@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  * Bei EMailAdressBuch handelt es sich um eine Klasse, die die E-Mail Adressen von Personen aus einer Datei sucht und ausgibt. 
  * @author Jonas, Dominik, Julia
- * V01.00B00
+ * @version V01.00B00
  */
 public class EMailAdressBuch {
 	// Byte Order Mark zur Verhinderung einer fehlerhaften Ausgabe.

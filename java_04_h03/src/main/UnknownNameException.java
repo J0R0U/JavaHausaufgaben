@@ -2,7 +2,7 @@ package main;
  /**
   * Bei UnknownNameException handelt es sich um eine RuntimeException, welche für einen Fehler durch einen unbekannten Namen steht.
   * @author Jonas, Dominik, Julia
-  * V01.00B00
+  * @version V01.00B00
   */
 public class UnknownNameException extends RuntimeException {
 	
