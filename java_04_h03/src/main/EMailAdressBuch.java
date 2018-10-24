@@ -21,7 +21,7 @@ public class EMailAdressBuch {
 	private HashMap<String, String> data;
 
 	/**
-	 * Konstruktor der HashMap "data".
+	 * Konstruktor: Initialisiert die Attribute.
 	 */
 	public EMailAdressBuch() {
 		data = new HashMap<>();
@@ -29,6 +29,7 @@ public class EMailAdressBuch {
 
 	/**
 	 * Liest die Daten aus der Datei ein und speichert sie in der HashMap.
+	 * 
 	 * @param dateiname String; Pfad der Datei, die eingelesen werden soll.
 	 * @throws FileNotFoundException wird geschmissen, wenn die Datei nicht gefunden wird.
 	 */
@@ -49,9 +50,10 @@ public class EMailAdressBuch {
 	}
 
 	/**
+	 * Liest eine Datei über die gegebene URL ein und speichert die Daten in der HashMap.
 	 * 
-	 * @param url
-	 * @throws IOException
+	 * @param url URL zur Datei
+	 * @throws IOException wenn die Datei nicht gelesen werden konnte.
 	 */
 	public void mitarbeiterEinlesen(URL url) throws IOException {
 		URLConnection con = url.openConnection();
@@ -71,6 +73,7 @@ public class EMailAdressBuch {
 	}
 
 	/**
+	 * Fügt den Namen mit der zugehoerigen E-Mail-Adresse in die Map ein.
 	 * 
 	 * @param name String; enthaelt den Schluessel der gesuchten E-Mail Adresse. 
 	 * @param email String; enthaelt die E-Mail Adresse zum eingegebenen Schluessel.
@@ -83,6 +86,7 @@ public class EMailAdressBuch {
 	 * Ueberprueft, ob name in der Datei vorhanden ist.
 	 * Falls ja, gibt er die zugehoerige E-Mail Adresse zurueck.
 	 * Falls nein, wirft er die selbstgeschriebene UnknownNameException.
+	 * 
 	 * @param name String; enthaelt den Schluessel der gesuchten E-Mail Adresse. 
 	 * @return gibt die E-Mail Adresse des angegebenen Schluessels name zurueck.
 	 */
@@ -93,7 +97,9 @@ public class EMailAdressBuch {
 	}
 
 	/**
+	 * Gibt eine String-Repraesentation des Objektes zurück.
 	 * 
+	 * @return String-Repraesentation des Objektes
 	 */
 	public String toString() {
 		StringBuilder ret = new StringBuilder("{");
@@ -102,7 +108,8 @@ public class EMailAdressBuch {
 			ret.append(key + "=" + value + ", \n");
 		});
 
-		ret.delete(ret.length() - 2, ret.length());
+		// letztes Komma und den Zeilenumbruch entfernen
+		ret.delete(ret.length() - 3, ret.length());
 		ret.append("}");
 
 		return ret.toString();
@@ -110,7 +117,8 @@ public class EMailAdressBuch {
 
 	/**
 	 * Dies ist eine Test-Methode.
-	 * @param args
+	 * 
+	 * @param args Kommandozeilenparameter
 	 */
 	public static void main(String[] args) {
 		try {
