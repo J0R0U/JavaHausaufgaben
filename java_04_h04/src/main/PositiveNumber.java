@@ -127,25 +127,9 @@ public class PositiveNumber {
 		case 'f': ret = 15;	break;
 		}
 
-		switch (base) {
-		case BASE_BIN:
-			if (ret < 0 || ret > 1) {
-				throw new NumberFormatException(
-						"The character '" + c + "' could not be converted to a number in the binary format.");
-			}
-			break;
-		case BASE_DEC:
-			if (ret < 0 || ret > 9) {
-				throw new NumberFormatException(
-						"The character '" + c + "' could not be converted to a number in the decimal format.");
-			}
-			break;
-		case BASE_HEX:
-			if (ret < 0 || ret > 15) {
-				throw new NumberFormatException(
-						"The character '" + c + "' could not be converted to a number in the hexadecimal format.");
-			}
-			break;
+		if (ret < 0 || ret >= base) {
+			throw new NumberFormatException(
+					"The character '" + c + "' could not be converted to a number in the format with base '" + base + "'.");
 		}
 
 		return ret;
