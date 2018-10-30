@@ -3,9 +3,9 @@ package main;
 import java.security.InvalidParameterException;
 
 /**
- * 
- * @author
- * @version V00.00B01
+ * In der Klasse PositiveNumber koennen postive Zahlen in Dezimal-, Hexal- oder Binaerzahlen umgerechnet werden.
+ * @author Jonas, Dominik, Julia
+ * @version V01.00B01
  */
 public class PositiveNumber {
 	//
@@ -16,15 +16,15 @@ public class PositiveNumber {
 	private int value;
 
 	/**
-	 * 
+	 * PositiveNumber setzt value auf 0.
 	 */
 	public PositiveNumber() {
 		value = 0;
 	}
 
 	/**
-	 * 
-	 * @param s
+	 * setDecimal setzt value auf eine Dezimalzahl mit Wert s.  
+	 * @param s String; der die zu verwendende Zahl enthaelt.
 	 * @throws 
 	 */
 	public void setDecimal(String s) {
@@ -32,8 +32,8 @@ public class PositiveNumber {
 	}
 
 	/**
-	 * 
-	 * @param s
+	 * setHexadecimal setzt value auf eine Hexadezimalzahl mit Wert s.
+	 * @param s String; der die zu verwendende Zahl enthaelt.
 	 * @throws
 	 */
 	public void setHexadecimal(String s) {
@@ -41,8 +41,8 @@ public class PositiveNumber {
 	}
 
 	/**
-	 * 
-	 * @param s
+	 * setBinary setzt value auf eine Binaerzahl mit Wert s.
+	 * @param s String; der die zu verwendende Zahl enthaelt.
 	 * @throws
 	 */
 	public void setBinary(String s) {
@@ -50,36 +50,36 @@ public class PositiveNumber {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * getDecimal gibt den Dezimalwert von value in einem String zurueck.
+	 * @return Dezimalwert in String
 	 */
 	public String getDecimal() {
 		return intToString(value, BASE_DEC);
 	}
 
 	/**
-	 * 
-	 * @return
+	 * getHexadecimal gibt den Hexadezimalwert von value in einem String zurueck.
+	 * @return Hexadezimalwert in String
 	 */
 	public String getHexadecimal() {
 		return intToString(value, BASE_HEX);
 	}
 
 	/**
-	 * 
-	 * @return
+	 * getBinary gibt den Binaerwert von value in einem String zurueck.
+	 * @return Binaerwert in String
 	 */
 	public String getBinary() {
 		return intToString(value, BASE_BIN);
 	}
 	
 	/**
-	 * 
-	 * @param s
-	 * @param base
-	 * @return
-	 * @throws ArithmeticException
-	 * @throws NumberFormatException
+	 * toValue rechnet s in eine Zahl mit anderer Basis um, die dann in newValue gespeichert wird.
+	 * @param s String; der die zu verwendende Zahl enthaelt.
+	 * @param base short; Base von newValue
+	 * @return die umgerechnete Zahl newValue
+	 * @throws ArithmeticException : wird geschmissen, wenn s negativ ist.
+	 * @throws NumberFormatException : wird geschmissen, wenn s keine Zahl darstellt.
 	 */
 	private static int toValue(String s, short base) throws ArithmeticException,NumberFormatException {
 		int newValue = 0;
@@ -94,11 +94,11 @@ public class PositiveNumber {
 	}
 
 	/**
-	 * 
-	 * @param c
-	 * @param base
-	 * @return
-	 * @throws NumberFormatException
+	 * charToShort wandelt den char c in den short ret um.
+	 * @param c 
+	 * @param base short; Base der Zahl
+	 * @return ret
+	 * @throws NumberFormatException : wird geschmissen, wenn s negativ oder groesser als die Base ist.
 	 */
 	private static short charToShort(char c, short base) throws NumberFormatException {
 		short ret = -1;
@@ -136,9 +136,9 @@ public class PositiveNumber {
 	}
 	
 	/**
-	 * 
-	 * @param v
-	 * @param base
+	 * konvertiert einen int Wert in einen String mit angegebener Basis (rekusiv).
+	 * @param v int; Wert der konvertiert werden soll.
+	 * @param base Basis in welcher der String ausgegeben werden soll.
 	 * @return
 	 */
 	private static String intToString(int v, short base) {
@@ -153,9 +153,9 @@ public class PositiveNumber {
 	}
 
 	/**
-	 * 
-	 * @param c
-	 * @return
+	 * shortToChar wandelt short c in einen Character.
+	 * @param c wird von short zu char geaendert.
+	 * @return char c
 	 */
 	private static char shortToChar(short c) {
 		switch (c) {
@@ -180,7 +180,7 @@ public class PositiveNumber {
 	}
 	
 	/**
-	 * 
+	 * Dies ist eine Test-Methode.
 	 * @param args
 	 */
 	public static void main(String[] args) {
