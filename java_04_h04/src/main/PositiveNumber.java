@@ -16,41 +16,38 @@ public class PositiveNumber {
 	private int value;
 
 	/**
-	 * PositiveNumber setzt value auf 0.
+	 * Konstruktor: Initialisiert den Wert mit 0.
 	 */
 	public PositiveNumber() {
 		value = 0;
 	}
 
 	/**
-	 * setDecimal setzt value auf eine Dezimalzahl mit Wert s.  
+	 * Setzt den Wert auf Wert s im Dezimalsystem.
 	 * @param s String; der die zu verwendende Zahl enthaelt.
-	 * @throws 
 	 */
 	public void setDecimal(String s) {
 		value = toValue(s, BASE_DEC);
 	}
 
 	/**
-	 * setHexadecimal setzt value auf eine Hexadezimalzahl mit Wert s.
+	 * Setzt den Wert auf Wert s im Hexadezimalsystem.
 	 * @param s String; der die zu verwendende Zahl enthaelt.
-	 * @throws
 	 */
 	public void setHexadecimal(String s) {
 		value = toValue(s, BASE_HEX);
 	}
 
 	/**
-	 * setBinary setzt value auf eine Binaerzahl mit Wert s.
+	 * Setzt den Wert auf Wert s im Binaersystem.
 	 * @param s String; der die zu verwendende Zahl enthaelt.
-	 * @throws
 	 */
 	public void setBinary(String s) {
 		value = toValue(s, BASE_BIN);
 	}
 
 	/**
-	 * getDecimal gibt den Dezimalwert von value in einem String zurueck.
+	 * Gibt den Wert als Dezimalzahl zurueck.
 	 * @return Dezimalwert in String
 	 */
 	public String getDecimal() {
@@ -58,7 +55,7 @@ public class PositiveNumber {
 	}
 
 	/**
-	 * getHexadecimal gibt den Hexadezimalwert von value in einem String zurueck.
+	 * Gibt den Wert als Hexadezimalzahl zurueck.
 	 * @return Hexadezimalwert in String
 	 */
 	public String getHexadecimal() {
@@ -66,7 +63,7 @@ public class PositiveNumber {
 	}
 
 	/**
-	 * getBinary gibt den Binaerwert von value in einem String zurueck.
+	 * Gibt den Wert als Binaerzahl zurueck.
 	 * @return Binaerwert in String
 	 */
 	public String getBinary() {
@@ -74,11 +71,11 @@ public class PositiveNumber {
 	}
 	
 	/**
-	 * toValue rechnet s in eine Zahl mit anderer Basis um, die dann in newValue gespeichert wird.
+	 * Konvertiert die als String uebergebene Zahl im gegebenen Stellenwertsystem zu einem Integerwert im Dezimalsystem.
 	 * @param s String; der die zu verwendende Zahl enthaelt.
 	 * @param base short; Base von newValue
 	 * @return die umgerechnete Zahl newValue
-	 * @throws ArithmeticException : wird geschmissen, wenn s negativ ist.
+	 * @throws ArithmeticException : wird geschmissen, wenn der Wert zu groß ist.
 	 * @throws NumberFormatException : wird geschmissen, wenn s keine Zahl darstellt.
 	 */
 	private static int toValue(String s, short base) throws ArithmeticException,NumberFormatException {
@@ -94,38 +91,20 @@ public class PositiveNumber {
 	}
 
 	/**
-	 * charToShort wandelt den char c in den short ret um.
-	 * @param c 
-	 * @param base short; Base der Zahl
-	 * @return ret
-	 * @throws NumberFormatException : wird geschmissen, wenn s negativ oder groesser als die Base ist.
+	 * Wandelt ein Zeichen in einem gegebenen Stellenwertsystem in seinen numerischen Wert um.
+	 * @param c Zeichen welches in eine Zahl umgewandelt werden soll.
+	 * @param base short; Basis des Stellenwertsystems
+	 * @return numerischer Wert des Zeichens
+	 * @throws NumberFormatException : wird geschmissen, wenn s negativ oder groesser als die Basis ist.
 	 */
 	private static short charToShort(char c, short base) throws NumberFormatException {
 		short ret = -1;
-		switch (c) {
-		case '0': ret = 0;  break;
-		case '1': ret = 1;  break;
-		case '2': ret = 2;  break;
-		case '3': ret = 3;  break;
-		case '4': ret = 4;  break;
-		case '5': ret = 5;  break;
-		case '6': ret = 6;  break;
-		case '7': ret = 7;  break;
-		case '8': ret = 8;  break;
-		case '9': ret = 9;  break;
-		case 'A': ret = 10;	break;
-		case 'a': ret = 10;	break;
-		case 'B': ret = 11;	break;
-		case 'b': ret = 11;	break;	
-		case 'C': ret = 12;	break;
-		case 'c': ret = 12;	break;
-		case 'D': ret = 13;	break;
-		case 'd': ret = 13;	break;
-		case 'E': ret = 14;	break;
-		case 'e': ret = 14;	break;
-		case 'F': ret = 15; break;
-		case 'f': ret = 15;	break;
-		}
+		if(c >= '0' && c <= '9')
+			ret = (short) (c - '0');
+		else if(c >= 'A' && c <= 'F')
+			ret = (short) (c - 'A' + 10);
+		else if(c >= 'a' && c <= 'f')
+			ret = (short) (c - 'a' + 10);
 
 		if (ret < 0 || ret >= base) {
 			throw new NumberFormatException(
@@ -136,15 +115,15 @@ public class PositiveNumber {
 	}
 	
 	/**
-	 * konvertiert einen int Wert in einen String mit angegebener Basis (rekusiv).
+	 * Konvertiert einen Integer Wert in einen String mit angegebener Basis (rekursiv).
 	 * @param v int; Wert der konvertiert werden soll.
-	 * @param base Basis in welcher der String ausgegeben werden soll.
-	 * @return
+	 * @param base Basis des Stellenwertsystems in welchem der Wert als String ausgegeben werden soll.
+	 * @return Stringrepraesentation der gegebenen Zahl im entsprechenden Stellenwertsystems
 	 */
 	private static String intToString(int v, short base) {
 		String ret = "";
 		if(v == 0) {
-			return ret;
+			return "0";
 		}
 		short mod = (short) (v%base);
 		ret += shortToChar(mod);
@@ -153,30 +132,16 @@ public class PositiveNumber {
 	}
 
 	/**
-	 * shortToChar wandelt short c in einen Character.
-	 * @param c wird von short zu char geaendert.
-	 * @return char c
+	 * Wandelt eine Zahl in ein entsprechendes einstelliges Zeichen in einem beliebigen Stellenwertsystem um
+	 * @param c Zahl welche umgewandelt werden soll
+	 * @return einstelliges Zeichen für Darstellung in Stellenwertsystemen (besonders für Basis >10)
 	 */
 	private static char shortToChar(short c) {
-		switch (c) {
-		case 0:	 return '0';
-		case 1:	 return '1';
-		case 2:	 return '2';
-		case 3:	 return '3';
-		case 4:	 return '4';
-		case 5:	 return '5';
-		case 6:	 return '6';
-		case 7:	 return '7';
-		case 8:	 return '8';
-		case 9:	 return '9';
-		case 10: return 'A';
-		case 11: return 'B';
-		case 12: return 'C';
-		case 13: return 'D';
-		case 14: return 'E';
-		case 15: return 'F';
-		}
-		throw new InvalidParameterException();
+		if(c >= 0 && c <= 9)
+			return (char) ('0' + c);
+		if(c >= 10 && c <= 16)
+			return (char) ('A' + c - 10);
+		throw new InvalidParameterException("The value '" + c + "' is not compatible with a base <= 16" );
 	}
 	
 	/**
