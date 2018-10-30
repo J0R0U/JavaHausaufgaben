@@ -49,8 +49,8 @@ public class EMailAdressBuch {
 	}
 
 	/**
-	 * 
-	 * @param url
+	 * Liest Schluessel und Wert aus der uebergebenen URL aus und speichert es in der HashMap data.
+	 * @param url URL; Link zur Datei, die eingelesen werden soll.
 	 * @throws IOException
 	 */
 	public void mitarbeiterEinlesen(URL url) throws IOException {
@@ -71,7 +71,7 @@ public class EMailAdressBuch {
 	}
 
 	/**
-	 * 
+	 * Einfuegen fuegt den Namen und die E-Mail in die HashMap data ein.
 	 * @param name String; enthaelt den Schluessel der gesuchten E-Mail Adresse. 
 	 * @param email String; enthaelt die E-Mail Adresse zum eingegebenen Schluessel.
 	 */
@@ -92,9 +92,7 @@ public class EMailAdressBuch {
 		throw new UnknownNameException(name);
 	}
 
-	/**
-	 * 
-	 */
+	@Override
 	public String toString() {
 		StringBuilder ret = new StringBuilder("{");
 
