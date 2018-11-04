@@ -33,11 +33,18 @@ public class MyArrayList {
 		System.out.println(myArrayList2);//[0,6,7,8,9]
 	}
 
+	/*
+	 * Konstruktor von arr und size
+	 */
 	public MyArrayList() {
 		arr = new int[10];
 		size = 0;
 	}
 
+	/*
+	 * get gibt das Element an der angegebenen Stelle zurueck. 
+	 * Wirft eine ArrayIndexOutOfBoundsException, falls pos nicht zwischen 0 und size liegt.
+	 */
 	public int get(int pos) {
 		if(pos >= size) {
 			throw new ArrayIndexOutOfBoundsException("Index " + pos + " ist kein valider Index.");
@@ -45,6 +52,9 @@ public class MyArrayList {
 		return arr[pos];
 	}
 
+	/*
+	 * add haengt ein Element hinten an die Liste an.
+	 */
 	public void add(int i) {
 		if (size >= arr.length) {
 			int[] temp = new int[arr.length * 2];
@@ -56,6 +66,11 @@ public class MyArrayList {
 		size++;
 	}
 
+	/*
+	 * Fuegt ein Element an der Position pos ein. 
+	 * Verschiebt alle folgenden Elemente eine Position nach hinten. 
+	 * Wirft eine ArrayIndexOutOfBoundsException, falls pos nicht zwischen 0 und size liegt.
+	 */
 	public void add(int i, int pos) {
 		if (pos > size || pos < 0)
 			throw new ArrayIndexOutOfBoundsException("Index " + pos + " ist kein valider Index.");
@@ -72,6 +87,11 @@ public class MyArrayList {
 		size++;
 	}
 
+	/*
+	 * Loescht das Element an der Position pos. 
+	 * Verschiebt alle folgenden Elemente eine Position nach vorne. 
+	 * Wirft eine ArrayIndexOutOfBoundsException, falls pos nicht zwischen 0 und size liegt.
+	 */
 	public void delete(int pos) {
 		if (pos > size || pos < 0)
 			throw new ArrayIndexOutOfBoundsException("Index " + pos + " ist kein valider Index.");
@@ -94,19 +114,32 @@ public class MyArrayList {
 		}
 	}
 
+	/*
+	 * Gibt die Anzahl der aufgenommenen Elemente zurueck.
+	 */
 	public int size() {
 		return size;
 	}
 
+	/*
+	 * Gibt die Groesse des Feldes (einschliesslich freier Elemente) zurueck.
+	 */
 	public int capacity() {
 		return arr.length;
 	}
 
+	/*
+	 * clear loescht das Feld.
+	 */
 	public void clear() {
 		arr = new int[10];
 		size = 0;
 	}
 
+	/*
+	 * Erzeugt einen Klon der this-Liste.(non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
 	@Override
 	public MyArrayList clone() {
 		MyArrayList ret = new MyArrayList();
@@ -114,7 +147,10 @@ public class MyArrayList {
 		ret.size = size;
 		return ret;
 	}
-
+	/*
+	 * Gibt eine Stringdarstellung in der Form [1,2,3,4,7,9] zurueck.(non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder("[");
