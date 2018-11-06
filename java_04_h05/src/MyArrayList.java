@@ -1,5 +1,8 @@
-package main;
-
+/**
+ * Eine mitwachsende Liste, welche ganze Zahlen aufnehmen kann.
+ * @author Jonas, Julia, Dominik
+ * @version V01.00B01
+ */
 public class MyArrayList {
 	private int[] arr;
 	private int size;
@@ -33,17 +36,18 @@ public class MyArrayList {
 		System.out.println(myArrayList2);//[0,6,7,8,9]
 	}
 
-	/*
-	 * Konstruktor von arr und size
+	/**
+	 * Default-Konstruktor: Intialisiert die Attribute mit entsprechenden Initialwerten.
 	 */
 	public MyArrayList() {
 		arr = new int[10];
 		size = 0;
 	}
 
-	/*
-	 * get gibt das Element an der angegebenen Stelle zurueck. 
-	 * Wirft eine ArrayIndexOutOfBoundsException, falls pos nicht zwischen 0 und size liegt.
+	/**
+	 * Gibt das Element an der angegebenen Stelle zurueck. 
+	 * @return Element an gegebener Position
+	 * @throws ArrayIndexOutOfBoundsException falls pos nicht zwischen 0 und size liegt.
 	 */
 	public int get(int pos) {
 		if(pos >= size) {
@@ -52,8 +56,8 @@ public class MyArrayList {
 		return arr[pos];
 	}
 
-	/*
-	 * add haengt ein Element hinten an die Liste an.
+	/**
+	 * Haengt ein Element hinten an die Liste an.
 	 */
 	public void add(int i) {
 		if (size >= arr.length) {
@@ -66,13 +70,13 @@ public class MyArrayList {
 		size++;
 	}
 
-	/*
+	/**
 	 * Fuegt ein Element an der Position pos ein. 
 	 * Verschiebt alle folgenden Elemente eine Position nach hinten. 
-	 * Wirft eine ArrayIndexOutOfBoundsException, falls pos nicht zwischen 0 und size liegt.
+	 * @throws ArrayIndexOutOfBoundsException falls pos nicht zwischen 0 und size liegt.
 	 */
 	public void add(int i, int pos) {
-		if (pos > size || pos < 0)
+		if (pos >= size || pos < 0)
 			throw new ArrayIndexOutOfBoundsException("Index " + pos + " ist kein valider Index.");
 
 		if (size >= arr.length) {
@@ -87,13 +91,13 @@ public class MyArrayList {
 		size++;
 	}
 
-	/*
+	/**
 	 * Loescht das Element an der Position pos. 
 	 * Verschiebt alle folgenden Elemente eine Position nach vorne. 
-	 * Wirft eine ArrayIndexOutOfBoundsException, falls pos nicht zwischen 0 und size liegt.
+	 * @throws ArrayIndexOutOfBoundsException falls pos nicht zwischen 0 und size liegt.
 	 */
-	public void delete(int pos) {
-		if (pos > size || pos < 0)
+	public void delete(int pos) throws ArrayIndexOutOfBoundsException {
+		if (pos >= size || pos < 0)
 			throw new ArrayIndexOutOfBoundsException("Index " + pos + " ist kein valider Index.");
 
 		for (int i = 0; i < size - 1; i++) {
@@ -114,30 +118,33 @@ public class MyArrayList {
 		}
 	}
 
-	/*
+	/**
 	 * Gibt die Anzahl der aufgenommenen Elemente zurueck.
+	 * @return Anzahl der aufgenommenen Elemente
 	 */
 	public int size() {
 		return size;
 	}
 
-	/*
-	 * Gibt die Groesse des Feldes (einschliesslich freier Elemente) zurueck.
+	/**
+	 * Gibt die Groesse (einschliesslich freier Elemente) bzw. die Kapazitaet des Feldes zurueck.
+	 * @return Kapazitaet des aktuellen Feldes
 	 */
 	public int capacity() {
 		return arr.length;
 	}
 
-	/*
-	 * clear loescht das Feld.
+	/**
+	 * Setzt die Attribute auf ihre Initialwerte zurück.
 	 */
 	public void clear() {
 		arr = new int[10];
 		size = 0;
 	}
 
-	/*
-	 * Erzeugt einen Klon der this-Liste.(non-Javadoc)
+	/**
+	 * Gibt einen Klon des aktuellen Objekts zurueck.
+	 * @return Klon des Objekts
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
@@ -147,8 +154,10 @@ public class MyArrayList {
 		ret.size = size;
 		return ret;
 	}
-	/*
-	 * Gibt eine Stringdarstellung in der Form [1,2,3,4,7,9] zurueck.(non-Javadoc)
+	
+	/**
+	 * Gibt eine Stringdarstellung in der Form [1,2,3,4,7,9] zurueck.
+	 * @return Stringdarstellung der Liste
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
