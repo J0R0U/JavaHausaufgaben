@@ -1,3 +1,4 @@
+package main;
 /**
  * Eine mitwachsende Liste, welche ganze Zahlen aufnehmen kann.
  * @author Jonas, Julia, Dominik
