@@ -1,16 +1,19 @@
 
 public class TitForTat implements GefStrategie {
-
+	private boolean lastDecission;
+	
+	public TitForTat() {
+		lastDecission = true;
+	}
+	
 	@Override
 	public boolean getNextDecision() {
-		// TODO Auto-generated method stub
-		return false;
+		return lastDecission;
 	}
 
 	@Override
 	public void setOpponentsLastDecision(boolean decision) {
-		// TODO Auto-generated method stub
-
+		lastDecission = decision;
 	}
 
 }

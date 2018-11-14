@@ -1,16 +1,21 @@
 
 public class Spite implements GefStrategie {
+	private boolean betrayed;
+	
+	public Spite() {
+		betrayed = false;
+	}
 
 	@Override
 	public boolean getNextDecision() {
-		// TODO Auto-generated method stub
-		return false;
+		return !betrayed;
 	}
 
 	@Override
 	public void setOpponentsLastDecision(boolean decision) {
-		// TODO Auto-generated method stub
-
+		if(!decision) {
+			betrayed = true;
+		}
 	}
 
 }

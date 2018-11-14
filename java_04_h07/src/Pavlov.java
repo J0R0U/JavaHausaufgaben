@@ -1,16 +1,19 @@
 
 public class Pavlov implements GefStrategie {
+	private boolean kooperate;
+	
+	public Pavlov() {
+		kooperate = true;
+	}
 
 	@Override
 	public boolean getNextDecision() {
-		// TODO Auto-generated method stub
-		return false;
+		return kooperate;
 	}
 
 	@Override
 	public void setOpponentsLastDecision(boolean decision) {
-		// TODO Auto-generated method stub
-
+		kooperate = kooperate == decision;
 	}
 
 }
