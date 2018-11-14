@@ -1,7 +1,16 @@
-
+/**
+ * Strategie "PerKind": Spielt periodisch die Folge kooperieren/kooperieren/verraten.
+ * @author Jonas, Julia, Dominik
+ *
+ */
 public class PerKind implements GefStrategie {
-	boolean sequence[] = {true, true, false};
-	int pos = 0;
+	boolean[] sequence;
+	int pos;
+	
+	public PerKind() {
+		sequence = new boolean[]{true, true, false};
+		pos = 0;
+	}
 
 	@Override
 	public boolean getNextDecision() {

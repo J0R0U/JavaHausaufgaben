@@ -1,4 +1,8 @@
-
+/**
+ * Strategie "Random": Trifft immer eine zufaellige Entscheidung.
+ * @author Jonas, Julia, Dominik
+ *
+ */
 public class Random implements GefStrategie {
 
 	@Override

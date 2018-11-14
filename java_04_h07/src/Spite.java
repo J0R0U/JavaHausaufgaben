@@ -1,4 +1,8 @@
-
+/**
+ * Strategie "Spite": Kooperiert solange, bis der Mitspieler zum ersten Mal verraet.
+ * @author Jonas, Julia, Dominik
+ *
+ */
 public class Spite implements GefStrategie {
 	private boolean betrayed;
 	

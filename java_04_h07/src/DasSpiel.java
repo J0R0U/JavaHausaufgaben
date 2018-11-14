@@ -1,4 +1,8 @@
-
+/**
+ * Spielt verschiedene Partien mit jeweils zwei Strategien gegeneinander (Jeder gegen Jeden)
+ * @author Jonas, Julia, Dominik
+ *
+ */
 public class DasSpiel {
 	public static void main(String[] args) {
 		GefDilemma gd = new GefDilemma(new Pavlov(), new PerKind());

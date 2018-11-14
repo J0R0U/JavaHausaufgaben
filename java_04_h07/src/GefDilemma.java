@@ -1,13 +1,26 @@
-
+/**
+ * Stellt das Spielprinzip und den genauen Spielablauf zweier Strategien dar.
+ * @author Jonas, Julia, Dominik
+ *
+ */
 public class GefDilemma {
 	private GefStrategie playerOne;
 	private GefStrategie playerTwo;
 
+	/**
+	 * Konstruktor: Initialisiert die Spielstrategien, die gegeneinander spielen
+	 * @param playerOne erste Gefangenenstrategie
+	 * @param playerTwo zweite Gefangenenstrategie
+	 */
 	public GefDilemma(GefStrategie playerOne, GefStrategie playerTwo) {
 		this.playerOne = playerOne;
 		this.playerTwo = playerTwo;
 	}
 
+	/**
+	 * Spielt das Spiel zwischen den beiden Spielern mit gegebener Anzahl von Runden
+	 * @param n Anzahl zu spielender Runden
+	 */
 	public void spiele(int n) {
 		int pointsOne = 0;
 		int pointsTwo = 0;

@@ -1,4 +1,9 @@
-
+/**
+ * Strategie "TitForTat": Kopiert in jeder Runde den letzten Zug des anderes Spielers.
+ * Beginnt mit Kooperation.
+ * @author Jonas, Julia, Dominik
+ *
+ */
 public class TitForTat implements GefStrategie {
 	private boolean lastDecission;
 	
