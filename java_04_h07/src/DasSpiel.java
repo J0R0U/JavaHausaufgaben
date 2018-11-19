@@ -1,7 +1,7 @@
 /**
  * Spielt verschiedene Partien mit jeweils zwei Strategien gegeneinander (Jeder gegen Jeden)
  * @author Jonas, Julia, Dominik
- *
+ * V01.00B01
  */
 public class DasSpiel {
 	public static void main(String[] args) {

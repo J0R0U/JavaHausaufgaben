@@ -1,7 +1,7 @@
 /**
  * Strategie "Random": Trifft immer eine zufaellige Entscheidung.
  * @author Jonas, Julia, Dominik
- *
+ * V01.00B01
  */
 public class Random implements GefStrategie {
 

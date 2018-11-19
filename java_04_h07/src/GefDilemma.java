@@ -1,7 +1,7 @@
 /**
  * Stellt das Spielprinzip und den genauen Spielablauf zweier Strategien dar.
  * @author Jonas, Julia, Dominik
- *
+ * V01.00B01
  */
 public class GefDilemma {
 	private GefStrategie playerOne;
