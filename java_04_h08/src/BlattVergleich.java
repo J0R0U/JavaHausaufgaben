@@ -1,7 +1,15 @@
 import java.util.Comparator;
 
+/**
+ * BlattVergleich vergleicht die zwei Blaetter miteinander.
+ * @author Jonas, Dominik, Julia
+ * V01.00B01
+ */
 public class BlattVergleich implements Comparator<Blatt> {
 
+	/**
+	 * compare vergleicht das Blatt von Spieler 1 mit dem von Spieler 2.
+	 */
 	@Override
 	public int compare(Blatt arg0, Blatt arg1) {
 		if (arg0.isTripple() && arg1.isTripple())
@@ -22,6 +30,10 @@ public class BlattVergleich implements Comparator<Blatt> {
 			return Integer.compare(arg0.sum(), arg1.sum());
 	}
 
+	/**
+	 * Testmethode
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// Verschiedene Blaetter zum Testen erzeugen
 		Blatt drillingNiedrig = new Blatt(new int[] { 2, 2, 2 });
