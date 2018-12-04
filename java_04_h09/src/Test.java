@@ -1,4 +1,8 @@
-
+/**
+ * Testklasse
+ * @author Jonas, Dominik, Julia
+ *
+ */
 public class Test {
 	public static void main(String[] args) {
 		Schiebepuzzle puzzle = new Schiebepuzzle();

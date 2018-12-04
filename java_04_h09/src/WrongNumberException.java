@@ -1,5 +1,9 @@
 
-
+/**
+ * Exception fuer fehlerhafte Plaettchenwerte.
+ * @author Jonas, Dominik, Julia
+ *
+ */
 @SuppressWarnings("serial")
 public class WrongNumberException extends RuntimeException {
 	String msg;
@@ -9,14 +13,14 @@ public class WrongNumberException extends RuntimeException {
 	}	
 
 	private static String createMsg(int i, int min, int max) {
-		StringBuilder ret = new StringBuilder();
-		ret.append("Der Angegebene Wert ");
-		ret.append(i);
-		ret.append(" ist nicht Element des Intervalls [");
-		ret.append(min);
-		ret.append(",");
-		ret.append(max);
-		ret.append("].");
+		StringBuilder ret = new StringBuilder()
+			.append("Der Angegebene Wert ")
+			.append(i)
+			.append(" ist nicht Element des Intervalls [")
+			.append(min)
+			.append(",")
+			.append(max)
+			.append("].");
 		return ret.toString();
 	}
 }

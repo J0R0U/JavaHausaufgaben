@@ -2,10 +2,20 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Ein Puzzle, bei dem 15 Plaettchen auf 16 Feldern angeordnet werden und durch Verschiebung in eine
+ * richtige Anordnung ueberfuehrt werden muessen.
+ * @author Jonas, Dominik, Julia
+ *
+ */
 public class Schiebepuzzle {
 	static final int FIELD_SIZE = 4;
 	int[][] field;
 
+	/**
+	 * Konstruktor: Initialisiert das Spielfeld spalten- und zeilenweise mit 15 durchnummerierten Plaettchen.
+	 * Das Feld rechts unten bleibt leer.
+	 */
 	public Schiebepuzzle() {
 		field = new int[FIELD_SIZE][FIELD_SIZE];
 
@@ -18,7 +28,13 @@ public class Schiebepuzzle {
 		field[FIELD_SIZE - 1][FIELD_SIZE - 1] = -1;
 	}
 
-	public void schiebe(int i) {
+	/**
+	 * Verschiebt das Plaettchen mit gegebenem Wert auf das freie Feld, wenn dieses direkt daneben liegt.
+	 * @param i Wert das zu verschiebenden Plaettchens
+	 * @throws WrongNumberException wenn kein Plaettchen mit uebergebem Wert existiert
+	 * @throws WrongMoveException wenn das gewaehlte Plaettchen nicht neben dem freien Feld liegt
+	 */
+	public void schiebe(int i) throws WrongNumberException, WrongMoveException {
 		if (i <= 0 || i >= FIELD_SIZE * FIELD_SIZE) {
 			throw new WrongNumberException(i, 1, maxElement());
 		} else if (!istVerschiebar(i)) {
@@ -32,6 +48,11 @@ public class Schiebepuzzle {
 		field[pointOfField.x][pointOfField.y] = -1;
 	}
 
+	/**
+	 * Gibt zurueck, ob das Plaettchen mit gegebenem Wert verschiebbar ist (neben dem freien Feld liegt)
+	 * @param i Wert des gewaehlten Plaettchens
+	 * @return ob das Plaettchen verschiebbar ist
+	 */
 	public boolean istVerschiebar(int i) {
 		Point pointOfEmptyField = getLocationOfField(-1);
 		Point pointOfField = getLocationOfField(i);
@@ -48,6 +69,10 @@ public class Schiebepuzzle {
 		return false;
 	}
 
+	/**
+	 * Fuehrt 100 zufaellige valide Zuege durch und mischt somit das Spielfeld.
+	 * Verhindert zwei aufeinanderfolge Zuege die sich gegenseitig negieren.
+	 */
 	public void mische() {
 		int valFromBefore = 0;
 		for (int i = 0; i < 100; i++) {
@@ -58,6 +83,11 @@ public class Schiebepuzzle {
 		}
 	}
 	
+	/**
+	 * Gibt die Position des Plaettchens mit dem gegeben Wert zurueck.
+	 * @param value Wert des Plaettchens
+	 * @return Position des Plaettchen
+	 */
 	public Point getLocationOfField(int value) {
 		for (int i = 0; i < field.length; i++) {
 			for (int j = 0; j < field[0].length; j++) {
@@ -69,10 +99,18 @@ public class Schiebepuzzle {
 		return null;
 	}
 	
+	/**
+	 * Gibt den maximal moeglichen Wert eines Plaettchens zurueck.
+	 * @return maximal moeglicher Wert
+	 */
 	public int maxElement() {
 		return FIELD_SIZE * FIELD_SIZE - 1;
 	}
-
+	
+	/**
+	 * Gibt die textuelle Repraesentation des Spielfeldes zurueck.
+	 * @return Spielfeld in Textform
+	 */
 	public String toString() {
 		StringBuilder ret = new StringBuilder();
 		int widthOfCell = ("" + maxElement()).length();
@@ -91,6 +129,11 @@ public class Schiebepuzzle {
 		return ret.toString();
 	}
 
+	/**
+	 * Fuegt eine horizontale Trennlinie mit gebener Anzahl an Trennzeichen zum StringBuilder hinzu.
+	 * @param sb StringBuilder an den die Trennlinie angehangen werden soll
+	 * @param length Anzahl an Trennzeichen
+	 */
 	private static void addSpacerLine(StringBuilder sb, int length) {
 		for (int i = 0; i < length; i++) {
 			sb.append("-");
@@ -98,6 +141,12 @@ public class Schiebepuzzle {
 		sb.append("\n");
 	}
 
+	/**
+	 * Fuegt eine Spielfeldzelle mit gegebenen Wert an den StringBuilder an.
+	 * @param sb StringBuilder an den die Zelle angehangen werden soll
+	 * @param cellWidth Breite der Zelle
+	 * @param value Wert der Zelle
+	 */
 	private static void addCell(StringBuilder sb, int cellWidth, int value) {
 		if (value != -1) {
 			sb.append(String.format("|%" + cellWidth + "d", value));
@@ -106,6 +155,11 @@ public class Schiebepuzzle {
 		}
 	}
 
+	/**
+	 * Gibt eine Liste der bewegbaren Plaettchen bzw. die Werte der bewegbaren Plaettchen zurueck.
+	 * @param filterField Feld, welches grundsaetzlich aus der Liste ausgenommen werden soll
+	 * @return Liste der bewegbaren Plaettchen
+	 */
 	private ArrayList<Integer> onlyMoveableCells(int filterField) {
 		ArrayList<Integer> ret = new ArrayList<>();
 		Point pos = getLocationOfField(-1);
@@ -120,6 +174,11 @@ public class Schiebepuzzle {
 		return ret;
 	}
 
+	/**
+	 * Gibt einen zufaelligen Wert zwischen 0 und max zurueck (inklusive).
+	 * @param max maximaler Wert
+	 * @return zufaelliger Wert
+	 */
 	private static int randInt(int max) {
 		Random rand = new Random(System.currentTimeMillis());
 		return rand.nextInt(max + 1);
