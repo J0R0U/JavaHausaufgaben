@@ -18,35 +18,17 @@ public class Rook extends Chessman {
 	@Override
 	public ArrayList<Position> getMoveList() {
 		ArrayList<Position> ret = new ArrayList<>();
+		Position currentPosition = getPosition();
 
-		Position myPos = getPosition();
-		Position temp = new Position(myPos.getX() + 1, myPos.getY());
-
-		while (temp.isValid()) {
-			ret.add(temp);
-			temp = new Position(temp.getX() + 1, myPos.getY());
+		for (int i = 1; i <= 8; i++) {
+			ret.add(new Position(i, currentPosition.getY()));
 		}
 
-		temp = new Position(myPos.getX() - 1, myPos.getY());
-
-		while (temp.isValid()) {
-			ret.add(temp);
-			temp = new Position(temp.getX() - 1, myPos.getY());
+		for (int i = 1; i <= 8; i++) {
+			ret.add(new Position(currentPosition.getX(), i));
 		}
 
-		temp = new Position(myPos.getX(), myPos.getY() + 1);
-
-		while (temp.isValid()) {
-			ret.add(temp);
-			temp = new Position(myPos.getX(), temp.getY() + 1);
-		}
-
-		temp = new Position(myPos.getX(), myPos.getY() - 1);
-
-		while (temp.isValid()) {
-			ret.add(temp);
-			temp = new Position(myPos.getX(), temp.getY() - 1);
-		}
+		ret.remove(currentPosition);
 
 		return ret;
 	}
