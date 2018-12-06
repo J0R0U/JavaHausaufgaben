@@ -1,4 +1,8 @@
-
+/**
+ * Testklasse
+ * @author Jonas, Dominik, Julia
+ *
+ */
 public class TestChess {
 	public static void main(String[] args) {
 		// Test eines Turms

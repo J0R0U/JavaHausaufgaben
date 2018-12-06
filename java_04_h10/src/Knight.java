@@ -1,9 +1,18 @@
 import java.util.ArrayList;
 
+/**
+ * Stellt die Schachfigur "Springer" dar.
+ * @author Jonas, Dominik, Julia
+ *
+ */
 public class Knight extends Chessman {
 
-	public Knight(Position _position) {
-		super(_position);
+	/**
+	 * Erzeugt ein neues Springer Objekt an gegebener Position.
+	 * @param position Startposition der Figur
+	 */
+	public Knight(Position position) {
+		super(position);
 	}
 
 	@Override

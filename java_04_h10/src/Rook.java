@@ -1,9 +1,18 @@
 import java.util.ArrayList;
 
+/**
+ * Stellt die Schachfigur "Turm" dar
+ * @author Jonas, Dominik, Julia
+ *
+ */
 public class Rook extends Chessman {
 
-	public Rook(Position _position) {
-		super(_position);
+	/**
+	 * Erzeugt ein neues Turm Objekt an gegebener Position.
+	 * @param position Startposition der Figur
+	 */
+	public Rook(Position position) {
+		super(position);
 	}
 
 	@Override
