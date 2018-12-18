@@ -1,18 +1,18 @@
 
 /**
- * 
- * @author
- * @version
+ * Berechnet die Punkte der Kochkurve zu einer bestimmten Rekursionstiefe.
+ * @author Jonas, Dominik, Julia
+ * @version V01.00B01
  */
 public class KochKurve {
 
 	/**
-	 * 
-	 * @param ax
-	 * @param ay
-	 * @param bx
-	 * @param by
-	 * @param rek
+	 * Ruft kochKurveRek auf und gibt anschliessend das Ergebnis aus.
+	 * @param ax ; double
+	 * @param ay ; double
+	 * @param bx ; double
+	 * @param by ; double
+	 * @param rek ; double , Rekursionstiefe
 	 */
 	public static void kochKurve(double ax, double ay, double bx, double by, int rek) {
 		System.out.printf("Rekursionstiefe %d: ", rek);
@@ -21,12 +21,12 @@ public class KochKurve {
 	}
 
 	/**
-	 * 
-	 * @param ax
-	 * @param ay
-	 * @param bx
-	 * @param by
-	 * @param rek
+	 * Berechnet rekursiv die einzelnen Punkte der Kochkurve fuer die uebergebene Rekursionstiefe.
+	 * @param ax ; double
+	 * @param ay ; double 
+	 * @param bx ; double 
+	 * @param by ; double
+	 * @param rek ; double , Rekursionstiefe
 	 */
 	private static void kochKurveRek(double ax, double ay, double bx, double by, int rek) {
 		if (rek == 0) {
@@ -49,10 +49,10 @@ public class KochKurve {
 	}
 
 	/**
-	 * 
-	 * @param ax
-	 * @param bx
-	 * @param weight
+	 * Berechnet den X- oder Y-Wert des gesuchten Punktes.
+	 * @param ax ; double
+	 * @param bx ; double
+	 * @param weight ; double
 	 * @return
 	 */
 	private static double getWeightnedPoint(double ax, double bx, double weight) {
@@ -60,11 +60,11 @@ public class KochKurve {
 	}
 
 	/**
-	 * 
-	 * @param one
-	 * @param two
-	 * @param three
-	 * @param four
+	 * Berechnet den dritten Punkt des gerade bearbeteten Abschnitts der Kochkurve.
+	 * @param one ; double
+	 * @param two ; double
+	 * @param three ; double
+	 * @param four ; double
 	 * @return
 	 */
 	private static double calculateNewPoint(double one, double two, double three, double four) {
@@ -72,7 +72,7 @@ public class KochKurve {
 	}
 
 	/**
-	 * 
+	 * Test-Methode.
 	 * @param args
 	 */
 	public static void main(String[] args) {

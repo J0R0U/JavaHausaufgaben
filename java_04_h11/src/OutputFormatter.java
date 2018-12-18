@@ -2,16 +2,16 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 /**
- * 
- * @author
- * @version
+ * Diese Klasse dient nur zur korrekten Bildschirmausgabe.
+ * @author Jonas, Dominik, Julia
+ * @version V01.00B01
  */
 public class OutputFormatter {
 
 	/**
-	 * 
-	 * @param x
-	 * @param y
+	 * Diese Funktion wandelt die uebergebenen Parameter in einen String um.
+	 * @param x ; double , X-Wert des Punktes.
+	 * @param y ; double , Y-Wert des Punktes
 	 * @return
 	 */
 	public static String formatToString(double x, double y) {
@@ -19,25 +19,25 @@ public class OutputFormatter {
 	}
 
 	/**
-	 * 
-	 * @param d
+	 * Diese Funktion wandelt den uebergebenen Parameter in einen String um.
+	 * @param d ; double , der umgewandelt werden soll.
 	 * @return
 	 */
 	private static String fomatToString(double d) {
 		if (d == (int) d) {
 			return String.format("%d", (int) d);
 		} else {
-			return String.format("%s", roundForPrint(d)).replace(".",
-					"" + new DecimalFormatSymbols(Locale.US).getDecimalSeparator());
+			return String.format("%s", floorForPrint(d)).replace(".",
+					"" + new DecimalFormatSymbols(Locale.getDefault()).getDecimalSeparator());
 		}
 	}
 
 	/**
-	 * 
-	 * @param a
+	 * Schneidet den double-Wert bei einer Nachkommastelle ab.
+	 * @param a ; double, der abgeschnitten werden soll.
 	 * @return
 	 */
-	private static double roundForPrint(double a) {
+	private static double floorForPrint(double a) {
 		return ((int) (a * 10)) / 10.;
 	}
 }
