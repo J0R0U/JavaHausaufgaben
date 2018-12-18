@@ -80,7 +80,7 @@ public class KochKurve {
 	 * @return Der berechnete Wert.
 	 */
 	private static double getTriangleY(double ax, double ay, double bx, double by) {
-		return  calculateNewPoint(ay, by, bx, ay);
+		return  calculateNewPoint(ay, by, bx, ax);
 	}
 
 	/**
