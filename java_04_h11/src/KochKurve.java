@@ -7,12 +7,12 @@
 public class KochKurve {
 
 	/**
-	 * Ruft kochKurveRek auf und gibt anschliessend das Ergebnis aus.
-	 * @param ax ; double
-	 * @param ay ; double
-	 * @param bx ; double
-	 * @param by ; double
-	 * @param rek ; double , Rekursionstiefe
+	 * Ruft kochKurveRek auf und gibt anschliessend den letzten Punkt aus.
+	 * @param ax ; double X-Koordinate des Startpunkts
+	 * @param ay ; double Y-Koordinate des Startpunkts
+	 * @param bx ; double X-Koordinate des Endpunkts
+	 * @param by ; double Y-Koordinate des Endpunkts
+	 * @param rek ; double , Die Genauigkeit (Rekursionstiefe) mit welcher die KochKurve bestimmt werden soll.
 	 */
 	public static void kochKurve(double ax, double ay, double bx, double by, int rek) {
 		System.out.printf("Rekursionstiefe %d: ", rek);
@@ -21,12 +21,12 @@ public class KochKurve {
 	}
 
 	/**
-	 * Berechnet rekursiv die einzelnen Punkte der Kochkurve fuer die uebergebene Rekursionstiefe.
-	 * @param ax ; double
-	 * @param ay ; double 
-	 * @param bx ; double 
-	 * @param by ; double
-	 * @param rek ; double , Rekursionstiefe
+	 * Berechnet rekursiv die einzelnen Punkte der Kochkurve fuer die uebergebene Rekursionstiefe zwischen zwei gegebenen Punkten.
+	 * @param ax ; double X-Koordinate des Startpunkts
+	 * @param ay ; double Y-Koordinate des Startpunkts
+	 * @param bx ; double X-Koordinate des Endpunkts
+	 * @param by ; double Y-Koordinate des Endpunkts
+	 * @param rek ; double , Die Genauigkeit (Rekursionstiefe) mit welcher die KochKurve bestimmt werden soll.
 	 */
 	private static void kochKurveRek(double ax, double ay, double bx, double by, int rek) {
 		if (rek == 0) {
@@ -39,8 +39,8 @@ public class KochKurve {
 		double twoThirdX = getWeightnedPoint(ax, bx, 2. / 3);
 		double twoThirdY = getWeightnedPoint(ay, by, 2. / 3);
 
-		double newTriangleX = calculateNewPoint(oneThirdX, twoThirdX, oneThirdY, twoThirdY);
-		double newTriangleY = calculateNewPoint(oneThirdY, twoThirdY, twoThirdX, oneThirdX);
+		double newTriangleX = getTriangleX(oneThirdX, oneThirdY, twoThirdX, twoThirdY);
+		double newTriangleY = getTriangleY(oneThirdX, oneThirdY, twoThirdX, twoThirdY);
 
 		kochKurveRek(ax, ay, oneThirdX, oneThirdY, rek - 1);
 		kochKurveRek(oneThirdX, oneThirdY, newTriangleX, newTriangleY, rek - 1);
@@ -49,23 +49,47 @@ public class KochKurve {
 	}
 
 	/**
-	 * Berechnet den X- oder Y-Wert des gesuchten Punktes.
-	 * @param ax ; double
-	 * @param bx ; double
-	 * @param weight ; double
+	 * Berechnet einen Wert welcher gewichtet zwischen zwei weiteren Werten liegt.
+	 * @param a ; double Wert Eins
+	 * @param b ; double Wert Zwei
+	 * @param weight ; double Gewicht welches die Position zwischen den Punkten bestimmt. (0.5 ist z.B. die Haelfte zweichen Wert Eins und Zwei)
 	 * @return
 	 */
-	private static double getWeightnedPoint(double ax, double bx, double weight) {
-		return ax * (1 - weight) + bx * weight;
+	private static double getWeightnedPoint(double a, double b, double weight) {
+		return a * (1 - weight) + b * weight;
+	}
+	
+	/**
+	 * Berechnet den Y Wert eines gleichseitigen Dreiecks.
+	 * @param ax ; double X-Koordinate des ersten Eckpunkts
+	 * @param ay ; double Y-Koordinate des ersten Eckpunkts
+	 * @param bx ; double X-Koordinate des zweiten Eckpunkts
+	 * @param by ; double Y-Koordinate des zweiten Eckpunkts
+	 * @return Der berechnete Wert.
+	 */
+	private static double getTriangleX(double ax, double ay, double bx, double by) {
+		return calculateNewPoint(ax, bx, ay, by);
+	}
+	
+	/**
+	 * Berechnet den Y Wert eines gleichseitigen Dreiecks.
+	 * @param ax ; double X-Koordinate des ersten Eckpunkts
+	 * @param ay ; double Y-Koordinate des ersten Eckpunkts
+	 * @param bx ; double X-Koordinate des zweiten Eckpunkts
+	 * @param by ; double Y-Koordinate des zweiten Eckpunkts
+	 * @return Der berechnete Wert.
+	 */
+	private static double getTriangleY(double ax, double ay, double bx, double by) {
+		return  calculateNewPoint(ay, by, bx, ay);
 	}
 
 	/**
-	 * Berechnet den dritten Punkt des gerade bearbeteten Abschnitts der Kochkurve.
-	 * @param one ; double
-	 * @param two ; double
-	 * @param three ; double
-	 * @param four ; double
-	 * @return
+	 * Berechnet den X oder Y Wert eines gleichseitigen Dreiecks.
+	 * @param one ; double Wert Eins
+	 * @param two ; double Wert Zwei
+	 * @param three ; double Wert Drei
+	 * @param four ; double Wert Vier
+	 * @return Der berechnete Wert.
 	 */
 	private static double calculateNewPoint(double one, double two, double three, double four) {
 		return (one + two - Math.sqrt(3) * (three - four)) / 2;

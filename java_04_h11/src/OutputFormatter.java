@@ -12,7 +12,7 @@ public class OutputFormatter {
 	 * Diese Funktion wandelt die uebergebenen Parameter in einen String um.
 	 * @param x ; double , X-Wert des Punktes.
 	 * @param y ; double , Y-Wert des Punktes
-	 * @return
+	 * @return Der Punkt als String.
 	 */
 	public static String formatToString(double x, double y) {
 		return String.format("(%s/%s)", fomatToString(x), fomatToString(y));
@@ -21,7 +21,7 @@ public class OutputFormatter {
 	/**
 	 * Diese Funktion wandelt den uebergebenen Parameter in einen String um.
 	 * @param d ; double , der umgewandelt werden soll.
-	 * @return
+	 * @return Der Wert als String.
 	 */
 	private static String fomatToString(double d) {
 		if (d == (int) d) {
@@ -35,7 +35,7 @@ public class OutputFormatter {
 	/**
 	 * Schneidet den double-Wert bei einer Nachkommastelle ab.
 	 * @param a ; double, der abgeschnitten werden soll.
-	 * @return
+	 * @return Der abgeschnittene Wert mit einer Nachkommastelle.
 	 */
 	private static double floorForPrint(double a) {
 		return ((int) (a * 10)) / 10.;
