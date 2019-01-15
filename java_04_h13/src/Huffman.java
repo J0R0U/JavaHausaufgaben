@@ -1,149 +1,159 @@
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
+import java.util.Scanner;
 
+/**
+ * 
+ * @author 
+ *
+ */
 public class Huffman {
-	private static final char ALPHABET_START = 'A';
-	private static final char ALPHABET_END = 'Z';
-	private static final char[] OTHER_SYMBOLS = { ' ' };
-
-	private static final long ALPHABET_LENGTH = ALPHABET_END - ALPHABET_START + 1;
-	private static final long EXPECTED_LINE_COUNT = ALPHABET_LENGTH + OTHER_SYMBOLS.length + 1;
-
+	/**
+	 * Alle Symbole die in einer Datei codiert sein koennen.
+	 */
+	private static final ArrayList<Character> SYMBOLS = new ArrayList<>();
+	static {
+		for (char i = 'A'; i <= 'Z'; i++) {
+			SYMBOLS.add(i);
+		}
+		SYMBOLS.add(' ');
+	}
+	
+	/**
+	 * Die erwartete Laenge einer Datei (erste Zeile + alle Symbole).
+	 */
+	private static final int EXPECTED_LINE_COUNT = SYMBOLS.size() + 1;
+	
+	/**
+	 * Jede Zeile muss aus Nullen und Einsen bestehen, oder leer sein.
+	 */
 	private static final String LINE_REG_EX = "(0|1)*";
+	
+	/**
+	 * Der Fehlertext der ausgegeben werden soll wenn 
+	 */
+	private static final String LINE_COUNT_ERROR_TEXT = "Expected " + EXPECTED_LINE_COUNT
+			+ " lines in file, but got %d.";
+	
+	/**
+	 * Der Fehlertext der ausgegeben werden soll wenn 
+	 */
+	private static final String PARSING_ERROR_TEXT = "Parsing Error in line \"%s\" (must match \"" + LINE_REG_EX
+			+ "\")";
 
-	private static final String LINE_COUNT_ERROR_TEXT = "Expected line count %d but was %d.";
-	private static final String PARSING_ERROR_TEXT = "Parsing Error in following lines (must matsch ): ";
-
+	/**
+	 * 
+	 * @param f
+	 * @return
+	 */
 	public static String decode(File f) {
-		ExtractedHuffmanInfo ehi = new ExtractedHuffmanInfo();
-		loadInformationFromFile(f, ehi);
+		String encodedMessage = null;
+		String decodedMessage = null;
+		HashMap<String, Character> mapping = new HashMap<>();
 
-		if (ehi.getLineCount() != EXPECTED_LINE_COUNT) {
-			throw new IllegalArgumentException(
-					String.format(LINE_COUNT_ERROR_TEXT, EXPECTED_LINE_COUNT, ehi.getLineCount()));
-		} else if (ehi.parsingErrorOccurred()) {
-			throw new IllegalArgumentException(PARSING_ERROR_TEXT + ehi.getFailedLines());
+		int lineCount = lineCount(f);
+		if (lineCount != EXPECTED_LINE_COUNT) {
+			throw new IllegalArgumentException(String.format(LINE_COUNT_ERROR_TEXT, lineCount));
 		}
 
-		decodeWithMapping(ehi);
+		encodedMessage = loadInformationFromFile(f, mapping);
+		decodedMessage = decodeWithMapping(encodedMessage, mapping);
 
-		return ehi.getDecodedMessage();
+		return decodedMessage;
 	}
 
-	private static void loadInformationFromFile(File file, ExtractedHuffmanInfo ehi) {
-		try (Stream<String> lines = Files.lines(Paths.get(file.getPath()))) {
-			lines.forEachOrdered(ehi);
+	/**
+	 * Diese Methode zaehlt die Anzahl aller vorhandenen Zeilen in einer Datei. Es
+	 * kann leider keine Systemfunktion genutzt werden, da die letzte Zeile, sollte
+	 * sie keinen Inhalt haben, nicht als eigene Zeile angesehen wird.
+	 * 
+	 * @param f Die Datei, deren Zeilen gezhlt werden sollen.
+	 * @return Die Anzahl an Zeilen in der Datei.
+	 */
+	private static int lineCount(File f) {
+		try (BufferedInputStream is = new BufferedInputStream(new FileInputStream(f))) {
+			byte[] c = new byte[1024];
+			int count = 0;
+			int readChars = 0;
+			while ((readChars = is.read(c)) != -1) {
+				for (int i = 0; i < readChars; ++i) {
+					if (c[i] == '\n') {
+						++count;
+					}
+				}
+			}
+			return count + 1;
+		} catch (IOException e) {
+			return -1;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param f
+	 * @param m
+	 * @return
+	 */
+	private static String loadInformationFromFile(File f, HashMap<String, Character> m) {
+		try (Scanner sc = new Scanner(f)) {
+			int symbolIndex = 0;
+			String ret = null;
+			m.clear();
+
+			while (sc.hasNextLine()) {
+				String line = sc.nextLine();
+				if (!line.matches(LINE_REG_EX)) {
+					throw new IllegalArgumentException(String.format(PARSING_ERROR_TEXT, line));
+				} else if (ret == null) {
+					ret = line;
+				} else {
+					if (!line.isEmpty()) {
+						m.put(line, SYMBOLS.get(symbolIndex));
+					}
+					symbolIndex++;
+				}
+			}
+
+			return ret;
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
 
-	private static void decodeWithMapping(ExtractedHuffmanInfo ehi) {
+	/**
+	 * 
+	 * @param encodedMessage
+	 * @param mapping
+	 * @return
+	 */
+	private static String decodeWithMapping(String encodedMessage, HashMap<String, Character> mapping) {
 		int pos = 0;
 		int len = 0;
 
-		while (ehi.getEncodedMessage() != null && pos < ehi.getEncodedMessage().length()) {
-			if (ehi.getMapping().containsKey(ehi.getEncodedMessage().substring(pos, pos + len))) {
-				ehi.appendToDecodedMessage(ehi.getMapping().get(ehi.getEncodedMessage().substring(pos, pos + len)));
+		String ret = "";
+
+		while (encodedMessage != null && pos < encodedMessage.length()) {
+			if (mapping.containsKey(encodedMessage.substring(pos, pos + len))) {
+				ret += mapping.get(encodedMessage.substring(pos, pos + len));
 				pos += len;
 				len = 0;
 			} else {
 				len++;
 			}
 		}
+
+		return ret;
 	}
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String args[]) {
 		System.out.println(decode(new File("message.txt")));
-	}
-
-	private static class ExtractedHuffmanInfo implements Consumer<String> {
-		private boolean errorFlag;
-		private StringBuilder linesWithError;
-
-		private long lineCount;
-
-		private String encodedMessage;
-		private StringBuilder decodedMessage;
-		private HashMap<String, Character> mapping;
-		
-		ArrayList<Character> symbols;
-
-		public ExtractedHuffmanInfo() {
-			errorFlag = false;
-			linesWithError = new StringBuilder();
-
-			lineCount = 0;
-
-			encodedMessage = null;
-			decodedMessage = new StringBuilder();
-			mapping = new HashMap<>();
-			
-			symbols = new ArrayList<>();
-			for(char i = ALPHABET_START; i <= ALPHABET_END; ++i) {
-				symbols.add(i);
-			}
-			for(char c : OTHER_SYMBOLS) {
-				symbols.add(c);
-			}
-		}
-
-		public void accept(String line) {
-			lineCount++;
-			if (!isValid(line)) {
-				errorFlag = true;
-				linesWithError.append(lineCount);
-				linesWithError.append(", ");
-			} else if(lineCount == 1) {
-				encodedMessage = line;
-			} else if(!line.isEmpty()) {
-				mapping.put(line, lineCountToChar());
-			}
-		}
-
-		public void appendToDecodedMessage(char append) {
-			decodedMessage.append(append);
-		}
-
-		public boolean parsingErrorOccurred() {
-			return errorFlag;
-		}
-
-		public String getFailedLines() {
-			if (linesWithError.length() > 1) {
-				linesWithError.setLength(linesWithError.length() - 2);
-			}
-			return linesWithError.toString();
-		}
-
-		public long getLineCount() {
-			return lineCount;
-		}
-
-		public String getEncodedMessage() {
-			return encodedMessage;
-		}
-
-		public String getDecodedMessage() {
-			return decodedMessage.toString();
-		}
-
-		public HashMap<String, Character> getMapping() {
-			return mapping;
-		}
-
-		private static boolean isValid(String line) {
-			return line.matches(LINE_REG_EX);
-		}
-
-		private char lineCountToChar() {
-			return symbols.get((int) (lineCount - 2));
-		}
 	}
 }
