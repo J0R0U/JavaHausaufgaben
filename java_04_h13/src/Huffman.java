@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 /**
- * 
- * @author 
- *
+ * Diese Klasse entschluesselt einen Text, der zuvor mittels Huffman-Codierung verschluesselt wurde.
+ * @author Jonas, Domink, Julia
+ * V01.00B01
  */
 public class Huffman {
 	/**
@@ -46,9 +46,9 @@ public class Huffman {
 			+ "\")";
 
 	/**
-	 * 
-	 * @param f
-	 * @return
+	 * Decodiert die uebergebene Datei.
+	 * @param f ; Datei, die decodiert werden soll.
+	 * @return die decodierte Datei als String
 	 */
 	public static String decode(File f) {
 		String encodedMessage = null;
@@ -71,7 +71,7 @@ public class Huffman {
 	 * kann leider keine Systemfunktion genutzt werden, da die letzte Zeile, sollte
 	 * sie keinen Inhalt haben, nicht als eigene Zeile angesehen wird.
 	 * 
-	 * @param f Die Datei, deren Zeilen gezhlt werden sollen.
+	 * @param f Die Datei, deren Zeilen gezaehlt werden sollen.
 	 * @return Die Anzahl an Zeilen in der Datei.
 	 */
 	private static int lineCount(File f) {
@@ -93,10 +93,10 @@ public class Huffman {
 	}
 	
 	/**
-	 * 
-	 * @param f
-	 * @param m
-	 * @return
+	 * Diese Funktion liest die Informationen aus der uebergebenen Datei aus.
+	 * @param f ; Datei, deren Informationen geladen werden sollen.
+	 * @param m ; HashMap, die eine Huffman-Codierung ihrem entsprechenden Character zuweist.
+	 * @return die erste Zeile der Datei
 	 */
 	private static String loadInformationFromFile(File f, HashMap<String, Character> m) {
 		try (Scanner sc = new Scanner(f)) {
@@ -125,10 +125,10 @@ public class Huffman {
 	}
 
 	/**
-	 * 
-	 * @param encodedMessage
+	 * Diese Funktion entschluesselt die Datei.
+	 * @param encodedMessage ; enthaelt den Text, der decodiert werden soll.
 	 * @param mapping
-	 * @return
+	 * @return decodierten String.
 	 */
 	private static String decodeWithMapping(String encodedMessage, HashMap<String, Character> mapping) {
 		int pos = 0;
@@ -150,7 +150,7 @@ public class Huffman {
 	}
 
 	/**
-	 * 
+	 * Test-Methode
 	 * @param args
 	 */
 	public static void main(String args[]) {
